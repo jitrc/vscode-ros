@@ -44,11 +44,6 @@
       },
       {
         "category": "ROS",
-        "command": "ros.updateBuildTasks",
-        "title": "Update Build Tasks"
-      },
-      {
-        "category": "ROS",
         "command": "ros.updateCppProperties",
         "title": "Update C++ Properties"
       },
@@ -123,6 +118,7 @@
             "description": "Runs a launch file using roslaunch",
             "body": {
               "type": "ros",
+              "request": "launch",
               "command": "roslaunch",
               "name": "",
               "package": "",
@@ -135,6 +131,7 @@
             "description": "Runs an executable using rosrun",
             "body": {
               "type": "ros",
+              "request": "launch",
               "command": "rosrun",
               "name": "",
               "package": "",

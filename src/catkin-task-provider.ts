@@ -6,22 +6,22 @@ import * as vscode from "vscode";
  */
 export default class CatkinTaskProvider implements vscode.TaskProvider {
   public provideTasks(token?: vscode.CancellationToken): vscode.ProviderResult<vscode.Task[]> {
-    const command = `catkin_make --directory "${extension.baseDir}"`;
+    const command = `catkin build`;
 
-    const make = new vscode.Task({ type: "catkin" }, "make", "catkin");
-    make.execution = new vscode.ShellExecution(command, {
+    const build = new vscode.Task({ type: "catkin" }, "build", "catkin");
+    build.execution = new vscode.ShellExecution(command, {
       env: extension.env
     });
-    make.group = vscode.TaskGroup.Build;
-    make.problemMatchers = ["$catkin-gcc"];
+    build.group = vscode.TaskGroup.Build;
+    build.problemMatchers = ["$catkin-gcc"];
 
     const test = new vscode.Task({ type: "catkin", target: "run_tests" }, "run_tests", "catkin");
-    test.execution = new vscode.ShellExecution(`${command} run_tests`, {
+    test.execution = new vscode.ShellExecution(`${command} --catkin-make-args run_tests`, {
       env: extension.env
     });
     test.group = vscode.TaskGroup.Test;
 
-    return [make, test];
+    return [build, test];
   }
 
   public resolveTask(task: vscode.Task, token?: vscode.CancellationToken): vscode.ProviderResult<vscode.Task> {

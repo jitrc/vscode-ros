@@ -17,7 +17,7 @@ export function getConfig(): vscode.WorkspaceConfiguration {
  */
 export async function findCatkinWorkspace(dir: string): Promise<string> {
   while (dir && dirname(dir) !== dir) {
-    if (await pfs.exists(`${dir}/.catkin_workspace`)) {
+    if (await pfs.exists(`${dir}/.catkin_tools`)) {
       return dir;
     }
 

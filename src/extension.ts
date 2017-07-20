@@ -37,7 +37,7 @@ export async function activate(ctx: vscode.ExtensionContext) {
   // Activate if we're in a catkin workspace.
   context = ctx;
   baseDir = await utils.findCatkinWorkspace(vscode.workspace.rootPath);
-
+  console.log('catkin worksapce baseDir, '+baseDir);
   if (!baseDir) {
     return;
   }

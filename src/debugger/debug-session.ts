@@ -31,8 +31,8 @@ export default class DebugSession extends adapter.DebugSession {
     const settings = JSON.parse(request.debugSettings);
     const env = Object.assign(process.env, settings.env || process.env);
     const args = [request.package, request.target].concat(request.args);
-
-    this.process = cp.spawn(request.command, args, { env });
+    
+    this.process = cp.spawn(request.command, [request.package, request.target],{ env });
 
     this.process.stdout.on("data", chunk =>
       this.sendEvent(new adapter.OutputEvent(chunk.toString(), "stdout"))
